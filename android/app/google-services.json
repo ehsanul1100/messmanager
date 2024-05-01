@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "565896366678",
+    "project_id": "messmanager-6ecaf",
+    "storage_bucket": "messmanager-6ecaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565896366678:android:5ce1e2b232bcaf787049f7",
+        "android_client_info": {
+          "package_name": "com.example.messmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHIG4UL9djt-uQnAFaS9_Iny5esaS43Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
