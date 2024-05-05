@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
+import 'package:intl/intl.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 
@@ -46,7 +47,7 @@ class _AddMealActionsState extends State<AddMealActions> {
                     });
                   }
                 },
-                child: Text('${dateTime}'))
+                child: Text('${DateFormat('yMMMMd').format(dateTime!)}'))
               ),
             ),
             Padding(

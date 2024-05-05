@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 
@@ -59,7 +60,7 @@ class _AddCostActionsState extends State<AddCostActions> {
                           });
                         }
                       },
-                      child: Text('${dateTime}'))),
+                      child: Text('${DateFormat('yMMMMd').format(dateTime!)}'))),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Container(

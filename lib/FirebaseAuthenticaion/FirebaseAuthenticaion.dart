@@ -43,6 +43,7 @@ class UserAuth {
         'userName': userName,
         'phone': phoneNumber,
         'mess' : null,
+        'messName' : 'messName',
         'manager' : false,
       });
     }
