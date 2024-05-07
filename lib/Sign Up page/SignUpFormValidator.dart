@@ -62,18 +62,12 @@ class SignUpAlertDialog {
       //   signUpErrorDialog(context, 'Please enter a valid Email!!');
       // }
       else {
-        isUserCreat =
             UserAuth.creatUser(email, password, context, userName, phone);
 
-        if (UserAuth.isUserCreat) {
-          if(context.mounted){Navigator.pop(context);}
-          Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) {
-              debugPrint('Sign in compleat');
-              return const ManagerDashboard();
-            },
-          ));
-        }
+        // if (UserAuth.isUserCreat) {
+        //   if(context.mounted){Navigator.pop(context);}
+          
+        // }
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         //     print('Sign in compleat');
         //     return ManagerDashboard();

@@ -113,11 +113,6 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 child: TextButton(onPressed: () {
                   UserLogin.userLogin(_emailController.text, _passwordController.text, context);
-                  if (UserLogin.isLogin == true) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                      return ManagerDashboard();
-                    },));
-                  }
                 }, child: Text('Login',
                 style: TextStyle(color: Colors.white),)),
               ),

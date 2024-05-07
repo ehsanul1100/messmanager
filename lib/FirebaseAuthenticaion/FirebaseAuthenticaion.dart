@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
 class UserAuth {
-  static bool isUserCreat = false;
-  static Future<bool> creatUser(String email, String password,
+  static Future<void> creatUser(String email, String password,
       BuildContext context, String userName, String phoneNumber) async {
     showDialog(
       context: context,
@@ -18,18 +18,17 @@ class UserAuth {
           .createUserWithEmailAndPassword(email: email, password: password);
       //save user data to firestore
       currentUserInformationSave(userCredential, userName, phoneNumber);
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
-      isUserCreat = true;
+      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) {
+          debugPrint('Sign in compleat');
+          return const ManagerDashboard();
+        },
+      ));
     } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
+      Navigator.pop(context);
       SignUpAlertDialog.signUpErrorDialog(context, e.code);
-      isUserCreat = false;
     }
-    return isUserCreat ;
   }
 
   static Future<void> currentUserInformationSave(UserCredential? userCredential,
@@ -42,9 +41,9 @@ class UserAuth {
         'email': userCredential.user!.email,
         'userName': userName,
         'phone': phoneNumber,
-        'mess' : null,
-        'messName' : 'messName',
-        'manager' : false,
+        'mess': null,
+        'messName': 'messName',
+        'manager': false,
       });
     }
   }
@@ -64,8 +63,12 @@ class UserLogin {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-       if(context.mounted){Navigator.pop(context);}
-      isLogin = true;
+      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) {
+          return ManagerDashboard();
+        },
+      ));
     } on FirebaseAuthException catch (e) {
       // SignUpAlertDialog.signUpErrorDialog(context, e.code);
       if (e.code == 'invalid-credential') {
@@ -80,7 +83,6 @@ class UserLogin {
         Navigator.pop(context);
         SignUpAlertDialog.signUpErrorDialog(context, e.code);
       }
-      isLogin = false;
     }
   }
 }
