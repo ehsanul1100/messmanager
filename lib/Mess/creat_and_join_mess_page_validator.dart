@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
+import 'package:messmanager/Mess/creat_and_join_mess_helper.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 import 'package:messmanager/UserInfo/current_user_information.dart';
 
@@ -56,22 +57,20 @@ class CreatMess {
     if (documentSnapshot.exists && currentUserInformationForMess.exists) {
       messId = documentSnapshot.data()!;
       userInfo = currentUserInformationForMess.data()!;
-      await creatMessWithMessId(messName, context, messId['mess_Id'],currentUser?.email,userInfo['messName']);
+      await creatMessWithMessId(messName, context, messId['mess_Id'],currentUser?.email,userInfo['userName']);
       documentReference.update({'mess_Id': messId['mess_Id'] + 1});
     }
   }
+  //creat mess with unique id and
 
   Future<void> creatMessWithMessId(
       String messName, BuildContext context, int messId,
       String? userEmail,
       String userName) async {
-    //Map<String,dynamic> messId =  ( FirebaseFirestore.instance.collection('Required variable').doc('Mess id').get() as Map<String,dynamic>);
-    //creat mess
-    int dateTimeInYear = DateTime.now().year;
-    int dateTimeInMonth = DateTime.now().month;
-    int dateTimeInDate = DateTime.now().day;
+    
+    CreatMessTableOnDatabse creatMessTableOnDatabse = CreatMessTableOnDatabse();
     DocumentReference messdocumentReference =  FirebaseFirestore.instance.collection('All_Mess').doc('$messId');
-    DocumentReference yeardocumentReference = messdocumentReference.collection('Meal_Table').doc('$dateTimeInYear');
+    
     try {
       await FirebaseFirestore.instance
           .collection('All_Mess')
@@ -84,9 +83,9 @@ class CreatMess {
             'cost' : 0,
             'diposit' : 0,
           });
-          yeardocumentReference.collection('Monthly_meal_table').doc('$dateTimeInMonth').collection('Meal').doc('$dateTimeInDate').set({
-            "$userEmail" : 0,
-          });
+          creatMessTableOnDatabse.creatTable(messdocumentReference, 'Meal_Table','Monthly_meal_table','Meal',userEmail);
+          creatMessTableOnDatabse.creatTable(messdocumentReference, 'Diposit_Table','Monthly_diposit_table','Diposit',userEmail);
+          creatMessTableOnDatabse.creatTable(messdocumentReference, 'Cost_Table','Monthly_cost_table','Cost',userEmail);
           
       await updateUserMessStatus(context, messId);
       Navigator.push(context, MaterialPageRoute(
