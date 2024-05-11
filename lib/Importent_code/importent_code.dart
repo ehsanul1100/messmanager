@@ -61,3 +61,69 @@
 
 //   print(allData);
 // }
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Dropdown List with StreamBuilder and QuerySnapshot in Flutter'),
+//         ),
+//         body: Center(
+//           child: DropdownWidget(),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class DropdownWidget extends StatefulWidget {
+//   @override
+//   _DropdownWidgetState createState() => _DropdownWidgetState();
+// }
+
+// class _DropdownWidgetState extends State<DropdownWidget> {
+//   String dropdownValue;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<QuerySnapshot>(
+//       stream: FirebaseFirestore.instance.collection('your_collection').snapshots(),
+//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//         if (!snapshot.hasData) return CircularProgressIndicator();
+//         return DropdownButton<String>(
+//           value: dropdownValue,
+//           icon: Icon(Icons.arrow_downward),
+//           iconSize: 24,
+//           elevation: 16,
+//           style: TextStyle(color: Colors.deepPurple),
+//           underline: Container(
+//             height: 2,
+//             color: Colors.deepPurpleAccent,
+//           ),
+//           onChanged: (String newValue) {
+//             setState(() {
+//               dropdownValue = newValue;
+//             });
+//           },
+//           items: snapshot.data!.docs.map((DocumentSnapshot document) {
+//             return DropdownMenuItem<String>(
+//               value: document['your_field'].toString(),
+//               child: Text(document['your_field'].toString()),
+//             );
+//           }).toList(),
+//         );
+//       },
+//     );
+//   }
+// }

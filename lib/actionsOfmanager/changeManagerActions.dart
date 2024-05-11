@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
+import 'package:messmanager/Mess/add_meal.dart';
+import 'package:messmanager/Mess/change_manager.dart';
+import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
 class ChangeManagerActions extends StatefulWidget {
   const ChangeManagerActions({super.key});
@@ -11,70 +14,96 @@ class ChangeManagerActions extends StatefulWidget {
   State<ChangeManagerActions> createState() => _ChangeManagerActionsState();
 }
 class _ChangeManagerActionsState extends State<ChangeManagerActions> {
-  Future? res;
-  List<String> memberList = [
-    'name1',
-    'name2',
-    'name3',
-    'name4',
-    'name5',
-    'name6',
-  ];
-  String? dropdownValueForMenver;
+    AddMeal addMeal = AddMeal();
+    ChangeManager changeManager = ChangeManager();
+    List<String> memberList = [];
+  String? dropdownValueForMember;
   @override
   Widget build(BuildContext context) {
     double widgetHight = MediaQuery.of(context).size.height;
     double widgetWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBarForManagerActionPages('Change Manager'),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: linearGradient,
-        ),
-        child: Column(
-          children: [
-            Container(
-              height: widgetHight * .01,
-            ),
-            Container(
-              width: widgetWidth * .92,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  boxShadow
-                ]
+      body: Stack(
+        children: [Container(
+          decoration: BoxDecoration(
+            gradient: linearGradient,
+          ),),
+          Column(
+            children: [
+              Container(
+                height: widgetHight * .01,
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: FutureBuilder(
-                  future: res,
-                   builder: (context, snapshot) {
-                     return DropdownButtonMemberList(
-                      memberList: memberList,
-                      hint: Text('Select Manager'));
-                   },),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Container(
+              Container(
+                width: widgetWidth * .92,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     boxShadow
                   ]
                 ),
-                child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
-                  child: Text('Change')),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: StreamBuilder(
+                              stream: addMeal.getMessMemberList(),
+                              builder: (context, snapshot) {
+                                if(snapshot.hasData){
+                                  return DropdownButton(
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    value: dropdownValueForMember,
+                                    hint: Text('Select Member'),
+                                    items: snapshot.data!.docs.map((DocumentSnapshot document){
+                                      return DropdownMenuItem<String>(
+                                        value: document.id.toString(),
+                                        child: Text(document['userName'].toString()),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        dropdownValueForMember = value;
+                                      });
+                                    },);
+                                }
+                                else{
+                                  return DropdownButtonMemberList
+                                (memberList: memberList,
+                                 hint: Text('Select Member'));
+                                }
+                              },
+                            ),
+                ),
               ),
-            )
-          ],
-        ),
-      ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      boxShadow
+                    ]
+                  ),
+                  child: ElevatedButton(
+                    onPressed: ()async {
+                      await changeManagerInDatabase();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
+                    },
+                    child: Text('Change')),
+                ),
+              )
+            ],
+          ),
+        
+      ]),
     );
+  }
+
+  Future<void>changeManagerInDatabase()async{
+    if(dropdownValueForMember == null){
+      SignUpAlertDialog.signUpErrorDialog(context, 'Please select a manager');
+    }
+    else{
+      changeManager.changeManager(dropdownValueForMember!);
+    }
   }
 }

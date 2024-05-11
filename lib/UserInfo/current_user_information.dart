@@ -11,6 +11,19 @@ class CurrentUserInformation {
         .doc(currentUser!.email)
         .get();
   }
+
+  Future<dynamic> currentUserParticularInformation(
+    String informationName,
+  )async{
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    DocumentSnapshot<Map<String,dynamic>> currentUserDocument = await FirebaseFirestore.instance
+        .collection('User')
+        .doc(currentUser!.email)
+        .get();
+      
+    Map<String,dynamic>? userInfo = currentUserDocument.data();
+    return userInfo![informationName];
+  }
 }
 
 // class CurrentUserInformationAsString {
