@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Mess/add_mess_member.dart';
+import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
 class AddMessMemberActions extends StatefulWidget {
   const AddMessMemberActions({super.key});
@@ -43,7 +45,8 @@ class _AddMessMemberActionsState extends State<AddMessMemberActions> {
                   ),
                 ),
                 ElevatedButton(onPressed: () {
-                  addMessMember.addMessMemberValidator(_memberEmailController.text, context);
+                  addMessMemberToTheMess();
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
                 }, child: Text("Add member"))
               ],
             ),
@@ -51,5 +54,13 @@ class _AddMessMemberActionsState extends State<AddMessMemberActions> {
         ],
       ),
     );
+  }
+  void addMessMemberToTheMess(){
+    if(_memberEmailController.text.isEmpty){
+      SignUpAlertDialog.signUpErrorDialog(context, 'Please enter a email address');
+    }
+    else{
+       addMessMember.addMessMemberValidator(_memberEmailController.text, context);
+    }
   }
 }

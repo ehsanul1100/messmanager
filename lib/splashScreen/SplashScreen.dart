@@ -10,7 +10,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>  with TickerProviderStateMixin{
   late final AnimationController _animationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 950))..repeat(reverse: true);
+    duration: const Duration(milliseconds: 1000))..repeat(reverse: true);
     late final Animation<double> _animation = CurvedAnimation(parent: _animationController, curve: Curves.linear);
     @override
   void dispose() {
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>  with TickerProviderStateMi
           child:
            FadeTransition(
             opacity: _animation,
-            child: Image.asset('images/SplashScreenImage.png'),
+            child: Image.asset('images/SplashScreenImage3.png'),
             ),
         ),
       ),

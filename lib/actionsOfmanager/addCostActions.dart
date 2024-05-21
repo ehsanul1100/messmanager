@@ -1,10 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
-import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Mess/add_cost.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 
@@ -93,8 +91,8 @@ class _AddCostActionsState extends State<AddCostActions> {
                                       .map((DocumentSnapshot document) {
                                     return DropdownMenuItem<String>(
                                       value: document.id.toString(),
-                                      child: Text(
-                                          document['userName'].toString()),
+                                      child:
+                                          Text(document['userName'].toString()),
                                     );
                                   }).toList(),
                                   onChanged: (value) {
@@ -103,8 +101,6 @@ class _AddCostActionsState extends State<AddCostActions> {
                                       debugPrint(value);
                                     });
                                   },
-                                  
-                                  
                                 );
                               } else {
                                 return DropdownButtonMemberList(
@@ -136,9 +132,8 @@ class _AddCostActionsState extends State<AddCostActions> {
                               boxShadow: [boxShadow],
                               borderRadius: BorderRadius.circular(30)),
                           child: ElevatedButton(
-                              onPressed: () async {
-                                await addCostToDatabase();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
+                              onPressed: () {
+                                addCostToDatabase();
                               },
                               child: Text('ADD')),
                         ),
@@ -153,16 +148,21 @@ class _AddCostActionsState extends State<AddCostActions> {
       ]),
     );
   }
-  Future<void> addCostToDatabase()async{
-    showDialog(context: context, builder: (context) => Center(child: CircularProgressIndicator(),));
+
+  void addCostToDatabase() {
+    
     double costAmount;
-    if(_costAmount.text.isEmpty){
+    if (_costAmount.text.isEmpty) {
       costAmount = 0;
+    } else {
+      try {
+        costAmount = double.parse(_costAmount.text);
+      } catch (e) {
+        costAmount = 0;
+      }
     }
-    else{
-      costAmount = double.parse(_costAmount.text);
-    }
-    addCost.addCostValidator(dropdownValueForMemver, costAmount, costDate, context);
-    Navigator.pop(context);
+    addCost.addCostValidator(
+        dropdownValueForMemver, costAmount, costDate, context);
+    
   }
 }

@@ -84,9 +84,8 @@ class _ChangeManagerActionsState extends State<ChangeManagerActions> {
                     ]
                   ),
                   child: ElevatedButton(
-                    onPressed: ()async {
-                      await changeManagerInDatabase();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
+                    onPressed: () {
+                      changeManagerInDatabase();
                     },
                     child: Text('Change')),
                 ),
@@ -98,12 +97,13 @@ class _ChangeManagerActionsState extends State<ChangeManagerActions> {
     );
   }
 
-  Future<void>changeManagerInDatabase()async{
+  void changeManagerInDatabase(){
     if(dropdownValueForMember == null){
       SignUpAlertDialog.signUpErrorDialog(context, 'Please select a manager');
     }
     else{
       changeManager.changeManager(dropdownValueForMember!);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ManagerDashboard(),));
     }
   }
 }

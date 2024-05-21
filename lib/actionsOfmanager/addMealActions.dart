@@ -75,12 +75,15 @@ class _AddMealActionsState extends State<AddMealActions> {
                                 itemCount: members.length,
                                 itemBuilder: (context, index) {
                                   //get textEditingController for meal
-                                  if(_mealController.length < members.length)_mealController.add(TextEditingController());
+                                  if (_mealController.length < members.length)
+                                    _mealController
+                                        .add(TextEditingController());
                                   //get every member
                                   DocumentSnapshot member = members[index];
                                   String docId = member.id;
                                   //get docId for every member
-                                  if(memberDocId.length < members.length)memberDocId.add(docId);
+                                  if (memberDocId.length < members.length)
+                                    memberDocId.add(docId);
                                   //fetching every member's data
                                   Map<String, dynamic> membersData =
                                       member.data() as Map<String, dynamic>;
@@ -129,15 +132,8 @@ class _AddMealActionsState extends State<AddMealActions> {
                           child: Padding(
                         padding: const EdgeInsets.only(top: 3, bottom: 3),
                         child: ElevatedButton(
-                            onPressed: () async {
-                              showDialog(context: context, builder: (context) {
-                                return Center(child: CircularProgressIndicator(),);
-                              },);
-                                await addMealToDatabase();
-                                Navigator.pop(context);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
-                            
-                              
+                            onPressed: () {
+                              addMealToDatabase();
                             },
                             child: Text('ADD')),
                       ))
@@ -153,11 +149,34 @@ class _AddMealActionsState extends State<AddMealActions> {
   }
 
   Future<void> addMealToDatabase() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     var i = 0;
     debugPrint('${memberDocId.length}');
     for (i = 0; i < _mealController.length; i++) {
-      double? mealCount = double.tryParse(_mealController[i].text);
-      addMeal.addMesl(memberDocId[i], mealCount, context, dateTime);
+      double mealCount;
+      if (_mealController.isEmpty ) {
+        mealCount = 0;
+      } else {
+        try {
+          mealCount = double.parse(_mealController[i].text);
+        } catch (e) {
+          mealCount = 0;
+        }
+      }
+      await addMeal.addMesl(memberDocId[i], mealCount, context, dateTime);
     }
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>const ManagerDashboard(),
+        ));
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -30,140 +29,139 @@ class _AddDepositActionsState extends State<AddDepositActions> {
     double widgetWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBarForManagerActionPages('Add Deposit'),
-      body: Stack(
-        children: [Container(
+      body: Stack(children: [
+        Container(
           height: widgetHight,
           decoration: BoxDecoration(
             gradient: linearGradient,
-          ),),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: widgetHight * .01
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [boxShadow]
-                  ),
-                  height: widgetHight*.06,
-                  width: widgetWidth*.92,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          DateTime? dateTimePicker = await showDatePicker(
-                              context: context,
-                              firstDate: DateTime(2000),
-                              initialDate: DateTime.now(),
-                              lastDate: DateTime(2030));
-                
-                          if (dateTimePicker != null) {
-                            setState(() {
-                              dipositDate = dateTimePicker;
-                            });
-                          }
-                        },
-                        child: Text(DateFormat('yMMMMd').format(dipositDate)))),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Container(
-                    height: widgetHight * .6,
-                    width: widgetWidth * .92,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              boxShadow,
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: StreamBuilder(
-                              stream: addMeal.getMessMemberList(),
-                              builder: (context, snapshot) {
-                                if(snapshot.hasData){
-                                  return DropdownButton(
-                                    icon: Icon(Icons.arrow_drop_down),
-                                    value: dropdownValueForMemver,
-                                    hint: Text('Select Member'),
-                                    items: snapshot.data!.docs.map((DocumentSnapshot document){
-                                      return DropdownMenuItem<String>(
-                                        value: document.id.toString(),
-                                        child: Text(document['userName'].toString()),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        dropdownValueForMemver = value;
-                                      });
-                                    },);
-                                }
-                                else{
-                                  return DropdownButtonMemberList
-                                (memberList: memberList,
-                                 hint: Text('Select Member'));
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 20,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              boxShadow
-                            ]
-                          ),
-                          child: TextField(
-                            controller: _dipositAmount,
-                            decoration: Style.textFieldStyle('Enter amount', Icon(Icons.money)),
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 3, bottom: 3),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [boxShadow],
-                              borderRadius: BorderRadius.circular(30)
-                            ),
-                            child: ElevatedButton(
-                                onPressed: () async{
-                                  await addDipositToDatabase();
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ManagerDashboard(),));
-                                },
-                                child: Text('ADD')),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ),
-        
-  ]),
+        ),
+        SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(height: widgetHight * .01),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [boxShadow]),
+                  height: widgetHight * .06,
+                  width: widgetWidth * .92,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        DateTime? dateTimePicker = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(2000),
+                            initialDate: DateTime.now(),
+                            lastDate: DateTime(2030));
+
+                        if (dateTimePicker != null) {
+                          setState(() {
+                            dipositDate = dateTimePicker;
+                          });
+                        }
+                      },
+                      child: Text(DateFormat('yMMMMd').format(dipositDate)))),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  height: widgetHight * .6,
+                  width: widgetWidth * .92,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            boxShadow,
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: StreamBuilder(
+                            stream: addMeal.getMessMemberList(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return DropdownButton(
+                                  icon: Icon(Icons.arrow_drop_down),
+                                  value: dropdownValueForMemver,
+                                  hint: Text('Select Member'),
+                                  items: snapshot.data!.docs
+                                      .map((DocumentSnapshot document) {
+                                    return DropdownMenuItem<String>(
+                                      value: document.id.toString(),
+                                      child:
+                                          Text(document['userName'].toString()),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      dropdownValueForMemver = value;
+                                    });
+                                  },
+                                );
+                              } else {
+                                return DropdownButtonMemberList(
+                                    memberList: memberList,
+                                    hint: Text('Select Member'));
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [boxShadow]),
+                        child: TextField(
+                          controller: _dipositAmount,
+                          decoration: Style.textFieldStyle(
+                              'Enter amount', Icon(Icons.money)),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              boxShadow: [boxShadow],
+                              borderRadius: BorderRadius.circular(30)),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                addDipositToDatabase();
+                              },
+                              child: Text('ADD')),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ]),
     );
   }
 
-  Future<void> addDipositToDatabase() async{
+  void addDipositToDatabase() {
     double diopsitAmount;
-    if(_dipositAmount.text.isEmpty){
+    if (_dipositAmount.text.isEmpty) {
       diopsitAmount = 0;
+    } else {
+      try {
+        diopsitAmount = double.parse(_dipositAmount.text);
+      } catch (e) {
+        diopsitAmount = 0;
+      }
     }
-    else{
-      diopsitAmount = double.parse(_dipositAmount.text);
-    }
-    addDiposit.addDipositValidator(dropdownValueForMemver, diopsitAmount, dipositDate, context);
+    addDiposit.addDipositValidator(
+        dropdownValueForMemver, diopsitAmount, dipositDate, context);
   }
 }

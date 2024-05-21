@@ -33,16 +33,7 @@ class AddMessMember {
       },
     );
 
-// check the email address is empty or not and show dialog to user
-
-    if (emailAddress.isEmpty) {
-      Navigator.pop(context);
-      SignUpAlertDialog.signUpErrorDialog(
-          context, 'Plage enter member email address!!');
-    }
-
 // if we found the member then add him to mess
-    else {
       Map<String, dynamic> member;
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
@@ -61,7 +52,6 @@ class AddMessMember {
           SignUpAlertDialog.signUpErrorDialog(context, 'Member not found!!');
         }
       }
-    }
   }
 
   //add mess member
@@ -86,6 +76,7 @@ class AddMessMember {
    await addMemberToEveryTableInDatabase(messdocumentReference, 'Meal_Table','Monthly_meal_table','Meal',emailAddress);
    await addMemberToEveryTableInDatabase(messdocumentReference, 'Diposit_Table','Monthly_diposit_table','Diposit',emailAddress);
    await addMemberToEveryTableInDatabase(messdocumentReference, 'Cost_Table','Monthly_cost_table','Cost',emailAddress);
+  await updateUserMessInformation(messId, emailAddress);
 
 
   }
@@ -102,5 +93,13 @@ class AddMessMember {
       "$userEmail" : 0,
     }, SetOptions(merge: true) );
     
+  }
+  Future<void> updateUserMessInformation(
+    int messId,
+    String emailAddress
+  ) async {
+    await FirebaseFirestore.instance.collection('User').doc(emailAddress).update({
+      'mess' : messId
+    });
   }
 }

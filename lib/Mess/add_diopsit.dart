@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
@@ -11,10 +12,18 @@ class AddDiposit{
     DateTime dipositDate,
     BuildContext context
   ){
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
     if(memberDocId != null){
       addDiposit(memberDocId, dipositAmount, dipositDate, context);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ManagerDashboard(),));
     }
     else{
+      Navigator.pop(context);
       SignUpAlertDialog.signUpErrorDialog(context, 'Pleage select a member');
     }
   }
