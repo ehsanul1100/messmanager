@@ -172,6 +172,10 @@ class _AddMealActionsState extends State<AddMealActions> {
       }
       await addMeal.addMesl(memberDocId[i], mealCount, context, dateTime);
     }
+    for (var element in memberDocId) {
+      await addMeal.updateTotalMeal(context, element, 'Meal_Table', 'Monthly_meal_table',
+        'Meal', dateTime,'Mess_Member_table','meal');
+    }
     Navigator.pop(context);
     Navigator.push(
         context,

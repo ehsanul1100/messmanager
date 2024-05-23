@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
@@ -10,7 +11,8 @@ class AddDiposit{
     String? memberDocId,
     double dipositAmount,
     DateTime dipositDate,
-    BuildContext context
+    BuildContext context,
+    List memberList
   ){
     showDialog(
         context: context,
@@ -19,6 +21,12 @@ class AddDiposit{
             ));
     if(memberDocId != null){
       addDiposit(memberDocId, dipositAmount, dipositDate, context);
+      for (var element in memberList) {
+        DocumentSnapshot documentSnapshot = element;
+        String memberId = documentSnapshot.id;
+         addMeal.updateTotalMeal(context, memberId, 'Diposit_Table', 'Monthly_diposit_table',
+        'Diposit', dipositDate,'Mess_Member_table','diposit');
+      }
       Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => const ManagerDashboard(),));
     }

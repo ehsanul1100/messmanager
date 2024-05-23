@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/FirebaseAuthenticaion.dart';
-import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
+
 
 class SignUpAlertDialog {
   static UserAuth? userAuth;

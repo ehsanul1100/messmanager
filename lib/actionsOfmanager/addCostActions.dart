@@ -17,6 +17,7 @@ class _AddCostActionsState extends State<AddCostActions> {
   DateTime costDate = DateTime.now();
   AddMeal addMeal = AddMeal();
   List<String> memberList = [];
+  List members = [];
   String? dropdownValueForMemver;
   AddCost addCost = AddCost();
   final _costAmount = TextEditingController();
@@ -83,6 +84,7 @@ class _AddCostActionsState extends State<AddCostActions> {
                             stream: addMeal.getMessMemberList(),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
+                                members = snapshot.data!.docs;
                                 return DropdownButton(
                                   icon: Icon(Icons.arrow_drop_down),
                                   hint: Text('Select member'),
@@ -162,7 +164,7 @@ class _AddCostActionsState extends State<AddCostActions> {
       }
     }
     addCost.addCostValidator(
-        dropdownValueForMemver, costAmount, costDate, context);
+        dropdownValueForMemver, costAmount, costDate, context,members);
     
   }
 }

@@ -10,7 +10,8 @@ class AddCost{
     String? memberDocId,
     double costAmount,
     DateTime costDate,
-    BuildContext context
+    BuildContext context,
+    List members,
   ){
     showDialog(
         context: context,
@@ -19,6 +20,12 @@ class AddCost{
             ));
     if(memberDocId != null){
       addCost(memberDocId, costAmount, costDate, context);
+      for (var element in members) {
+        DocumentSnapshot documentSnapshot = element;
+        String memberId = documentSnapshot.id;
+         addMeal.updateTotalCost(context, memberId, 'Cost_Table', 'Monthly_cost_table',
+        'Cost', costDate);
+      }
       Navigator.pop(context);
     Navigator.push(
         context,

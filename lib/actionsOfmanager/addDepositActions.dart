@@ -19,7 +19,9 @@ class _AddDepositActionsState extends State<AddDepositActions> {
   DateTime dipositDate = DateTime.now();
   AddMeal addMeal = AddMeal();
   AddDiposit addDiposit = AddDiposit();
-  List<String> memberList = [];
+  Map<String,dynamic>? memberList;
+  List<String> member = [];
+  List members = [];
   String? dropdownValueForMemver;
   AddCost addCost = AddCost();
   final _dipositAmount = TextEditingController();
@@ -85,6 +87,7 @@ class _AddDepositActionsState extends State<AddDepositActions> {
                             stream: addMeal.getMessMemberList(),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
+                                members = snapshot.data!.docs;
                                 return DropdownButton(
                                   icon: Icon(Icons.arrow_drop_down),
                                   value: dropdownValueForMemver,
@@ -105,7 +108,7 @@ class _AddDepositActionsState extends State<AddDepositActions> {
                                 );
                               } else {
                                 return DropdownButtonMemberList(
-                                    memberList: memberList,
+                                    memberList: member,
                                     hint: Text('Select Member'));
                               }
                             },
@@ -149,7 +152,7 @@ class _AddDepositActionsState extends State<AddDepositActions> {
       ]),
     );
   }
-
+  
   void addDipositToDatabase() {
     double diopsitAmount;
     if (_dipositAmount.text.isEmpty) {
@@ -162,6 +165,6 @@ class _AddDepositActionsState extends State<AddDepositActions> {
       }
     }
     addDiposit.addDipositValidator(
-        dropdownValueForMemver, diopsitAmount, dipositDate, context);
+        dropdownValueForMemver, diopsitAmount, dipositDate, context,members);
   }
 }
