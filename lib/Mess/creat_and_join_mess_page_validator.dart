@@ -93,8 +93,8 @@ class CreatMess {
           return const ManagerDashboard();
         },
       ));
-    } on FirebaseFirestore catch (e) {
-      SignUpAlertDialog.signUpErrorDialog(context, 'iefj');
+    }  catch (e) {
+      SignUpAlertDialog.signUpErrorDialog(context,'$e');
     }
   }
 

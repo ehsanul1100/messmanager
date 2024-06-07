@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Mess/mess_information.dart';
 import 'package:messmanager/UserInfo/current_user_information.dart';
 
 class AddMeal {
-  MessDtails messDtails = MessDtails();
   CurrentUserInformation currentUserInformation = CurrentUserInformation();
   Future<int> getMessId() async {
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
@@ -68,6 +66,7 @@ class AddMeal {
     String messMembertable,
     String memberUpdageField
   ) async {
+     MessDtails messDtails = MessDtails();
     double personalMeal = 0;
     int messId = await getMessId();
     DocumentReference messdocumentReference =
@@ -107,6 +106,7 @@ class AddMeal {
     // String messMembertable,
     // String memberUpdageField
   ) async {
+     MessDtails messDtails = MessDtails();
     double personalMeal = 0;
     int messId = await getMessId();
     DocumentReference messdocumentReference =

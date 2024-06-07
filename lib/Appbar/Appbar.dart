@@ -9,7 +9,7 @@ class CreateAppBarForManagerDashboard{
   AppBar createAppBarForDashboard() {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color.fromARGB(255, 55, 118, 150),
       title: FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(
         future: currentUserInformation.getUserInformatio(),
          builder: (context, snapshot) {
@@ -37,7 +37,7 @@ class _ManagerDrawerState extends State<ManagerDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width*.6,
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color.fromARGB(255, 55, 118, 150),
       child: DrawerManagerActions()
     );
   }

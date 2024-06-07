@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/FirebaseAuthenticaion.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
-import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpPage.dart';
 
 class LoginForm extends StatefulWidget {

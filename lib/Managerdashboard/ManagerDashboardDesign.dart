@@ -1,28 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:messmanager/LoginPage/textfildStyle.dart';
 
-Container creatContainer(String? titleOfTheMessInformationTableElemet,double? amuntOfTheElement) {
+Container creatContainer(String? titleOfTheMessInformationTableElemet,var amuntOfTheElement) {
   return Container(
     decoration: BoxDecoration(
-      // color: Colors.white,
-      border: Border(bottom: BorderSide()),
-      borderRadius: BorderRadius.zero,
-      // boxShadow: [
-      //   boxShadow
-      // ]
+      boxShadow: [boxShadow2],
+      borderRadius: BorderRadius.circular(20),
+      gradient: linearGradient
     ),
     child: Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 7,
+            flex: 5,
             child: Text(titleOfTheMessInformationTableElemet!)),
           Expanded(
-            flex: 3,
-            child: Text('${amuntOfTheElement!}')),
+            flex: 5,
+            child: Text('$amuntOfTheElement')),
         ],
       ),
     ),

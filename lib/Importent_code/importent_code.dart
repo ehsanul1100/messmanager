@@ -127,3 +127,17 @@
 //     );
 //   }
 // }
+
+// import 'package:async/async.dart';
+
+// StreamGroup<dynamic> streamGroup = StreamGroup<dynamic>();
+
+// streamGroup.add(stream1);
+// streamGroup.add(stream2);
+
+// return StreamBuilder<dynamic>(
+//   stream: streamGroup.stream,
+//   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+//     // your code here
+//   },
+// );

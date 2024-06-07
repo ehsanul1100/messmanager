@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messmanager/Mess/add_meal.dart';
 
 class MessDtails {
   dynamic messWantedInformationByCall(
@@ -71,4 +73,37 @@ class MessDtails {
           .set({updateFieldName: updateFieldValue});
     }
   }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getMessInfo(
+      String baseTableName,
+      String secondBaseTableName,
+      String requiredInforName,
+      DateTime currentDat
+      ) async* {
+    AddMeal addMeal = AddMeal();
+    int messId = await addMeal.getMessId();
+        yield* FirebaseFirestore.instance
+        .collection('All_Mess')
+        .doc('$messId')
+        .collection(baseTableName)
+        .doc('${currentDat.year}')
+        .collection(secondBaseTableName)
+        .doc('${currentDat.month}')
+        .snapshots();
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getMemberInfo(
+      String baseTableName,
+      ) async* {
+    AddMeal addMeal = AddMeal();
+    int messId = await addMeal.getMessId();
+    User? userDocId = FirebaseAuth.instance.currentUser;
+        yield* FirebaseFirestore.instance
+        .collection('All_Mess')
+        .doc('$messId')
+        .collection(baseTableName)
+        .doc(userDocId!.email)
+        .snapshots();
+  }
+  
 }

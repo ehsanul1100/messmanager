@@ -48,8 +48,9 @@ LinearGradient linearGradient = LinearGradient(
 // ignore: must_be_immutable
 class DropdownButtonMemberList extends StatefulWidget {
   List<String> memberList;
-  Text hint; 
-  DropdownButtonMemberList({super.key, required this.memberList,required this.hint});
+  Text hint;
+  DropdownButtonMemberList(
+      {super.key, required this.memberList, required this.hint});
 
   @override
   State<DropdownButtonMemberList> createState() =>
@@ -61,20 +62,23 @@ class _DropdownButtonMemberListState extends State<DropdownButtonMemberList> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-        value: memberSelect,
-        hint: widget.hint,
-        items: widget.memberList
-            .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem(
-                value: value,
-                child: Text(value));
-            })
-            .toList(),
-        onChanged: (value) {
-          if(value != null){
-            setState(() {
+      value: memberSelect,
+      hint: widget.hint,
+      items: widget.memberList.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem(value: value, child: Text(value));
+      }).toList(),
+      onChanged: (value) {
+        if (value != null) {
+          setState(() {
             memberSelect = value;
-          });}
-        },);
+          });
+        }
+      },
+    );
   }
 }
+
+BoxDecoration messInfoBoxDecoration = BoxDecoration(
+    boxShadow: [boxShadow2],
+    borderRadius: BorderRadius.circular(20),
+    gradient: linearGradient);
