@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
+import 'package:messmanager/Mess/add_meal.dart';
 import 'package:messmanager/Mess/mess_information.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,16 +15,6 @@ class ManagerDashboardBody extends StatefulWidget {
 }
 
 class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
-  double? myMeal = 0.0;
-  double? myDeposit = 0.0;
-  double? myCost = 0.0;
-  double? myBalance = 0.0;
-  double? mealRate = 0.0;
-  double? balance = 0.0;
-  double? totalMeal = 0.0;
-  double? totalDeposit = 0.0;
-  double? totalShoppingCost = 0.0;
-  MessDtails messDtails = MessDtails();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -37,14 +29,17 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   boxShadow
-                      // ],
-                      // color: Colors.white,
-                      // borderRadius: BorderRadius.circular(10)
-                      ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .03,
+                  child: creatFutureBuilderForMessName(),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .03,
+                  child: Center(
+                    child: Text(DateFormat('yMMM').format(DateTime.now())),
+                  ),
+                ),
+                SizedBox(
                   // shadowColor: Color.fromARGB(95, 0, 0, 0),
                   height: MediaQuery.of(context).size.height * .20,
                   width: MediaQuery.of(context).size.width,
@@ -61,37 +56,21 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
                       'Monthly_diposit_table',
                       'Diposit'),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * .2,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: creatStreamBuilderForMember(
-                            'Meal_Table',
-                            'Monthly_meal_table',
-                            'Meal',
-                            'Cost_Table',
-                            'Monthly_cost_table',
-                            'Cost',
-                            'Mess_Member_table'),
-                      )),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*.1,
+                  child: Center(child: Text('My info')),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        boxShadow: [boxShadow],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    width: MediaQuery.of(context).size.width * .92,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [Text('Bazar Date'), Text('Date')],
-                    ),
-                  ),
-                )
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * .2,
+                    width: MediaQuery.of(context).size.width,
+                    child: creatStreamBuilderForMember(
+                        'Meal_Table',
+                        'Monthly_meal_table',
+                        'Meal',
+                        'Cost_Table',
+                        'Monthly_cost_table',
+                        'Cost',
+                        'Mess_Member_table')),
               ],
             ),
           ),
@@ -129,19 +108,22 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
           Map<String, dynamic>? totalMealData = snapshot.data?.data1;
           Map<String, dynamic>? totalCostData = snapshot.data?.data2;
           Map<String, dynamic>? memberData = snapshot.data?.data3;
+          double mealCost;
+          try {
+            mealCost = memberData?['meal']*(totalCostData?[cost] / totalMealData?[meal]);
+          } catch (e) {
+            mealCost = 0.0;
+          }
           return GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 10, crossAxisCount: 1),
             scrollDirection: Axis.horizontal,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'My balance',
-                    doubleOutput(memberData?['diposit'] -
-                        (doubleOutput(memberData?['meal'] *
-                            (doubleOutput(totalCostData?[meal] )/
-                                doubleOutput(totalMealData?[cost])))))),
+                    'My balance',doubleOutput(memberData?['diposit']- mealCost)
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -157,10 +139,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
                     'My meal cost',
-                    doubleOutput(((memberData?['meal'] *
-                        doubleOutput(
-                            (doubleOutput(totalCostData?[meal] )/
-                                doubleOutput(totalMealData?[cost]))))))),
+                    doubleOutput(mealCost)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -249,7 +228,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
           Map<String, dynamic>? depositData = snapshot.data?.data3;
 
           return GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 10, crossAxisCount: 1),
             scrollDirection: Axis.horizontal,
             children: [
@@ -311,6 +290,20 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
         }
       },
     );
+  }
+
+  FutureBuilder<DocumentSnapshot<Map<String,dynamic>>> creatFutureBuilderForMessName(){
+    MessDtails messDtails = MessDtails();
+    return FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(future: messDtails.messNameReturn(), builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        Map<String,dynamic>? messData = snapshot.data?.data();
+        return Center(
+          child: Text(messData?['messName']),
+        );
+      } else {
+        return const Center(child: Text('Mess Name'),);
+      }
+    },);
   }
 }
 

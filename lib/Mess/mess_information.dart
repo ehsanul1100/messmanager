@@ -27,7 +27,11 @@ class MessDtails {
     }
   }
 
-  void messNameReturn(int messId) async {}
+  Future<DocumentSnapshot<Map<String,dynamic>>> messNameReturn() async {
+      AddMeal addMeal = AddMeal();
+      int messId = await addMeal.getMessId();
+      return await FirebaseFirestore.instance.collection('All_Mess').doc('$messId').get();
+  }
 
   void updateMessInfo(
     int messId,
