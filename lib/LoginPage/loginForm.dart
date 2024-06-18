@@ -26,17 +26,16 @@ class _LoginFormState extends State<LoginForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: MediaQuery.of(context).size.height * .1,
-            ),
-            Container(
+            SizedBox(height: MediaQuery.of(context).size.height * .05,),
+            Image.asset('images/loginLogo.png',scale: 2,),
+            SizedBox(
             height: MediaQuery.of(context).size.height * .5,
             width: MediaQuery.of(context).size.width * .7,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
              children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 40),
                 child: Text('Login',
                 style: TextStyle(
                   color: Colors.white,
@@ -55,7 +54,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: TextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: Style.textFieldStyle('Email', Icon(Icons.person)),
+                    decoration: Style.textFieldStyle('Email', const Icon(Icons.person)),
                   ),
                 ),
               ),
@@ -86,13 +85,13 @@ class _LoginFormState extends State<LoginForm> {
                             }
                           });
                       },
-                       icon: Icon(Icons.remove_red_eye)),
-                      prefixIconColor: Color.fromARGB(255, 18, 11, 100),
-                      focusColor: Color.fromARGB(255, 196, 196, 196),
+                       icon: const Icon(Icons.remove_red_eye)),
+                      prefixIconColor: const Color.fromARGB(255, 18, 11, 100),
+                      focusColor: const Color.fromARGB(255, 196, 196, 196),
                       filled: true,
-                      fillColor: Color.fromARGB(255, 255, 255, 255),
+                      fillColor: const Color.fromARGB(255, 255, 255, 255),
                       hintText: 'Password',
-                      prefixIcon: Icon(Icons.key),
+                      prefixIcon: const Icon(Icons.key),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(20)
@@ -105,25 +104,25 @@ class _LoginFormState extends State<LoginForm> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Color.fromARGB(255, 91, 79, 215),
+                  color: const Color.fromARGB(255, 91, 79, 215),
                     boxShadow: [
                     boxShadow2,
                     ]
                   ),
                 child: TextButton(onPressed: () {
                   UserLogin.userLogin(_emailController.text, _passwordController.text, context);
-                }, child: Text('Login',
+                }, child: const Text('Login',
                 style: TextStyle(color: Colors.white),)),
               ),
               TextButton(onPressed: (){},
-              child: Text('Forgot your Password?',
+              child: const Text('Forgot your Password?',
                selectionColor: Color.fromARGB(222, 17, 52, 205),
                style: TextStyle(color: Colors.white),),)
              ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * .1,
+            height: MediaQuery.of(context).size.height * .01,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
@@ -131,8 +130,8 @@ class _LoginFormState extends State<LoginForm> {
               width: MediaQuery.of(context).size.width * .7,
               child: Column(
                 children: [
-                  Text('or connect with',
-                  style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),),
+                  const Text('or connect with',
+                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Row(
@@ -143,7 +142,7 @@ class _LoginFormState extends State<LoginForm> {
                         height: MediaQuery.of(context).size.height * .05,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 41, 50, 173),
+                          color: const Color.fromARGB(255, 41, 50, 173),
                           boxShadow: [
                              boxShadow2,
                             ]
@@ -158,7 +157,7 @@ class _LoginFormState extends State<LoginForm> {
                         height: MediaQuery.of(context).size.height * .05,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 41, 50, 173),
+                          color: const Color.fromARGB(255, 41, 50, 173),
                           boxShadow: [
                              boxShadow2,
                             ]
@@ -177,16 +176,16 @@ class _LoginFormState extends State<LoginForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't have account?",
+              const Text("Don't have account?",
               style: TextStyle(color: Colors.white),),
               TextButton(onPressed: (){
                 Navigator.push(context, 
                 MaterialPageRoute(builder: (context) {
-                  return SignUpPage();
+                  return const SignUpPage();
                 },));
               },
-               child: Text('Sign up',
-               style: TextStyle(color: const Color.fromARGB(255, 0, 80, 146)),))
+               child: const Text('Sign up',
+               style: TextStyle(color: Color.fromARGB(255, 0, 80, 146)),))
             ],
           )
           ]),

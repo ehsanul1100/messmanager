@@ -8,8 +8,8 @@ import 'package:messmanager/UserInfo/current_user_information.dart';
 
 class CreatAndJoinMessValidator {
   // Enter mess name on allMess table and creat mess table include user
-  CreatMess creatMess = CreatMess();
   void creatMessNameValidator(String? messName, BuildContext context) {
+    CreatMess creatMess = CreatMess();
     if (messName == null || messName.isEmpty) {
       SignUpAlertDialog.signUpErrorDialog(
           context, 'Please enter a mess name!!');

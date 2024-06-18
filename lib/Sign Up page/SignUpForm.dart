@@ -35,14 +35,15 @@ class _SignUpFormState extends State<SignUpForm> {
           Container(
             height: MediaQuery.of(context).size.height * .02,
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * .7,
+          Image.asset('images/loginLogo.png',scale: 2,),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * .65,
             width: MediaQuery.of(context).size.width * .7,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
                   child: Text(
                     'Sign Up',
                     style: TextStyle(color: Colors.white, fontSize: 30),
@@ -60,7 +61,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       keyboardType: TextInputType.name,
                       controller: _userName,
                       decoration:
-                          Style.textFieldStyle('User Name', Icon(Icons.person)),
+                          Style.textFieldStyle('User Name', const Icon(Icons.person)),
                     ),
                   ),
                 ),
@@ -76,7 +77,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _email,
                       decoration:
-                          Style.textFieldStyle('Email', Icon(Icons.email)),
+                          Style.textFieldStyle('Email', const Icon(Icons.email)),
                     ),
                   ),
                 ),
@@ -92,7 +93,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       keyboardType: TextInputType.phone,
                       controller: _phone,
                       decoration:
-                          Style.textFieldStyle('Phone', Icon(Icons.phone)),
+                          Style.textFieldStyle('Phone', const Icon(Icons.phone)),
                     ),
                   ),
                 ),
@@ -124,13 +125,13 @@ class _SignUpFormState extends State<SignUpForm> {
                                   }
                                 });
                               },
-                              icon: Icon(Icons.remove_red_eye_sharp)),
-                          prefixIconColor: Color.fromARGB(255, 18, 11, 100),
-                          focusColor: Color.fromARGB(255, 196, 196, 196),
+                              icon: const Icon(Icons.remove_red_eye_sharp)),
+                          prefixIconColor: const Color.fromARGB(255, 18, 11, 100),
+                          focusColor: const Color.fromARGB(255, 196, 196, 196),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintText: 'Password',
-                          prefixIcon: Icon(Icons.key_outlined),
+                          prefixIcon: const Icon(Icons.key_outlined),
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                               borderRadius: BorderRadius.circular(20))),
@@ -169,13 +170,13 @@ class _SignUpFormState extends State<SignUpForm> {
                                   }
                                 });
                               },
-                              icon: Icon(Icons.remove_red_eye_sharp)),
-                          prefixIconColor: Color.fromARGB(255, 18, 11, 100),
-                          focusColor: Color.fromARGB(255, 196, 196, 196),
+                              icon: const Icon(Icons.remove_red_eye_sharp)),
+                          prefixIconColor: const Color.fromARGB(255, 18, 11, 100),
+                          focusColor: const Color.fromARGB(255, 196, 196, 196),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintText: 'Confirm Password',
-                          prefixIcon: Icon(Icons.key),
+                          prefixIcon: const Icon(Icons.key),
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                               borderRadius: BorderRadius.circular(20))),
@@ -186,7 +187,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color.fromARGB(255, 91, 79, 215),
+                      color: const Color.fromARGB(255, 91, 79, 215),
                       boxShadow: [
                         boxShadow2,
                       ]),
@@ -200,7 +201,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             _confirmPassword.text,
                             context);
                       },
-                      child: Text(
+                      child: const Text(
                         'Sign Up',
                         style: TextStyle(color: Colors.white),
                       )),
@@ -209,7 +210,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * .1,
+            height: MediaQuery.of(context).size.height * .01,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
@@ -218,10 +219,10 @@ class _SignUpFormState extends State<SignUpForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'or connect with',
                     style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -233,7 +234,7 @@ class _SignUpFormState extends State<SignUpForm> {
                           height: MediaQuery.of(context).size.height * .05,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 41, 50, 173),
+                              color: const Color.fromARGB(255, 41, 50, 173),
                               boxShadow: [
                                 boxShadow2,
                               ]),
@@ -247,7 +248,7 @@ class _SignUpFormState extends State<SignUpForm> {
                           height: MediaQuery.of(context).size.height * .05,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 41, 50, 173),
+                              color: const Color.fromARGB(255, 41, 50, 173),
                               boxShadow: [
                                 boxShadow2,
                               ]),
@@ -266,7 +267,7 @@ class _SignUpFormState extends State<SignUpForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Already have account.",
                 style: TextStyle(color: Colors.white),
               ),
@@ -274,14 +275,14 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return LoginPage();
+                        return const LoginPage();
                       },
                     ));
                   },
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style:
-                        TextStyle(color: const Color.fromARGB(255, 0, 80, 146)),
+                        TextStyle(color: Color.fromARGB(255, 0, 80, 146)),
                   ))
             ],
           )

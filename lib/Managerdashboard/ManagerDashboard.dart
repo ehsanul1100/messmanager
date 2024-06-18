@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashBoardBody.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardProfileBody.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardSettingsBody.dart';
+import 'package:messmanager/Managerdashboard/mess_members_details.dart';
 
 class ManagerDashboard extends StatefulWidget {
   const ManagerDashboard({super.key});
@@ -15,7 +17,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
   
   List managerDashboardBodys = [
     const ManagerDashboardBody(),
-    const ManagerDashboardSettingsBody(),
+    const MessMembersDetails(),
     const ManagerDashboardProfileBody(),
   ];
   CreateAppBarForManagerDashboard createAppBarForManagerDashboard = CreateAppBarForManagerDashboard();
@@ -26,22 +28,23 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
       drawer: const ManagerDrawer(),
       appBar: createAppBarForManagerDashboard.createAppBarForDashboard(),
       body: managerDashboardBodys[managerDashboardBodyIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
+      bottomSheet: BottomNavigationBar(
+        elevation: 1,
+        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
         unselectedItemColor: Colors.black,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         currentIndex: managerDashboardBodyIndex,
-        backgroundColor: const Color.fromARGB(255, 55, 118, 150),
-        items: [
-          const BottomNavigationBarItem(
+        backgroundColor: StyleOfBackground.bottomSheetColor,
+        items: const [
+          BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(Icons.home)),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings'),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter_list_sharp),
+            label: 'Member'),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile')
         ],

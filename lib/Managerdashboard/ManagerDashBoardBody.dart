@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:messmanager/LoginPage/textfildStyle.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
-import 'package:messmanager/Mess/add_meal.dart';
 import 'package:messmanager/Mess/mess_information.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,10 +18,10 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(color: Color.fromARGB(255, 55, 118, 150)),
+          decoration: BoxDecoration(gradient: StyleOfBackground.backgroundColor),
         ),
         Container(
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

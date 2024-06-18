@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/DrawerDesign.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/UserInfo/current_user_information.dart';
 
 class CreateAppBarForManagerDashboard{
@@ -9,7 +10,7 @@ class CreateAppBarForManagerDashboard{
   AppBar createAppBarForDashboard() {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Color.fromARGB(255, 55, 118, 150),
+      backgroundColor: StyleOfBackground.appBarColor,
       title: FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(
         future: currentUserInformation.getUserInformatio(),
          builder: (context, snapshot) {
@@ -17,7 +18,7 @@ class CreateAppBarForManagerDashboard{
              user = snapshot.data?.data();
              return Text(user?['userName']);
            } else {
-             return Text('Mess Manager');
+             return const Text('');
            }
          },),
     );
@@ -37,8 +38,8 @@ class _ManagerDrawerState extends State<ManagerDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width*.6,
-      backgroundColor: Color.fromARGB(255, 55, 118, 150),
-      child: DrawerManagerActions()
+      backgroundColor: const Color.fromARGB(255, 55, 118, 150),
+      child: const DrawerManagerActions()
     );
   }
 }
@@ -46,7 +47,7 @@ class _ManagerDrawerState extends State<ManagerDrawer> {
 AppBar appBarForManagerActionPages(String appBarTitle){
   return AppBar(
     title: Text(appBarTitle),
-    backgroundColor: Color.fromARGB(255, 55, 118, 150),
+    backgroundColor: const Color.fromARGB(255, 55, 118, 150),
     centerTitle: true,
   );
 }

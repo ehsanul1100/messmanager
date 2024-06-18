@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/FirebaseAutometicNavigate.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -7,11 +8,9 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>  with TickerProviderStateMixin{
-  late final AnimationController _animationController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 1000))..repeat(reverse: true);
-    late final Animation<double> _animation = CurvedAnimation(parent: _animationController, curve: Curves.linear);
+class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderStateMixin{
+ late AnimationController _animationController;
+late Animation<double> _animation;
     @override
   void dispose() {
     _animationController.dispose();
@@ -19,17 +18,18 @@ class _SplashScreenState extends State<SplashScreen>  with TickerProviderStateMi
   }
   @override
   void initState() {
-    Future.delayed(
-      const Duration(milliseconds: 2000),
-      () {
-        Navigator.pushReplacement(
-          context,
-           MaterialPageRoute(
-            builder: (context) {
-              return const AutometicNavigate();
-            },));
-      },
-    );
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this);
+      _animation = Tween(begin: 0.0,end: 1.0).animate(_animationController);
+      _animationController.forward();
+      _animationController.addStatusListener((status){
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse().then((onValue){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AutometicNavigate(),));
+          });
+        }
+      });
     super.initState();
   }
   @override
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>  with TickerProviderStateMi
           child:
            FadeTransition(
             opacity: _animation,
-            child: Image.asset('images/SplashScreenImage3.png'),
+            child: Image.asset('images/loginLogo.png'),
             ),
         ),
       ),

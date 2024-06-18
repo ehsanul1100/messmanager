@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:messmanager/FirebaseAuthenticaion/autometic_navigat_to_manager_db_or_creat_join_mess_page.dart';
 import 'package:messmanager/LoginPage/loginPage.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 
@@ -18,7 +19,7 @@ class _AutometicNavigateState extends State<AutometicNavigate> {
         stream: FirebaseAuth.instance.authStateChanges(),
          builder: (context, snapshot) {
            if (snapshot.hasData) {
-             return const ManagerDashboard();
+             return const AutometicNavigatToManagerDbOrCreatJoinMessPage();
            } else {
              return const LoginPage();
            }

@@ -41,7 +41,7 @@ class UserAuth {
         'email': userCredential.user!.email,
         'userName': userName,
         'phone': phoneNumber,
-        'mess': null,
+        'mess': 0,
         'messName': 'messName',
         'manager': false,
       });

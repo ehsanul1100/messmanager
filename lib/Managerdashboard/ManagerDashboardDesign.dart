@@ -29,3 +29,18 @@ TextStyle textStyle = TextStyle(
   color: Colors.white,
 );
 
+class StyleOfBackground {
+  static Color appBarColor =       Color.fromARGB(255, 255, 255, 255);
+  static Color bottomSheetColor = Color.fromARGB(255, 102, 173, 203);
+  static LinearGradient backgroundColor =  LinearGradient(
+    stops: [
+      .1,
+     .7
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color.fromARGB(255, 255, 255, 255),
+      Color.fromARGB(255, 102, 173, 203)
+    ]);
+}
