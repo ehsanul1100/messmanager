@@ -61,7 +61,7 @@ class _AddCostActionsState extends State<AddCostActions> {
                         }
                       },
                       child:
-                          Text('${DateFormat('yMMMMd').format(costDate!)}'))),
+                          Text(DateFormat('yMMMMd').format(costDate)))),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Container(

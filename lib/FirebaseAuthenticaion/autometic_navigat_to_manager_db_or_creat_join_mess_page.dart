@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/autometic_navigate_to_manager_db_member_db.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardSettingsBody.dart';
 
-class AutometicNavigatToManagerDbOrCreatJoinMessPage extends StatefulWidget {
-  const AutometicNavigatToManagerDbOrCreatJoinMessPage({super.key});
+class AutomaticNavigateToManagerDbOrCreateJoinMessPage extends StatefulWidget {
+  const AutomaticNavigateToManagerDbOrCreateJoinMessPage({super.key});
 
   @override
-  State<AutometicNavigatToManagerDbOrCreatJoinMessPage> createState() => _AutometicNavigatToManagerDbOrCreatJoinMessPageState();
+  State<AutomaticNavigateToManagerDbOrCreateJoinMessPage> createState() => _AutomaticNavigateToManagerDbOrCreateJoinMessPageState();
 }
 
-class _AutometicNavigatToManagerDbOrCreatJoinMessPageState extends State<AutometicNavigatToManagerDbOrCreatJoinMessPage> {
+class _AutomaticNavigateToManagerDbOrCreateJoinMessPageState extends State<AutomaticNavigateToManagerDbOrCreateJoinMessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +27,11 @@ class _AutometicNavigatToManagerDbOrCreatJoinMessPageState extends State<Automet
       if(snapshot.hasData){
         Map<String,dynamic>? userData = snapshot.data?.data();
         if(userData?['mess'] == 0){
+          //return to Create or join mess page
           return const ManagerDashboardSettingsBody();
         }
         else{
+          //return to Automatic navigate to manager or member dashboard
           return const AutometicNavigateToManagerDbMemberDb();
         }
       }

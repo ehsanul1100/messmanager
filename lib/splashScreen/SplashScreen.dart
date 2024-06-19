@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messmanager/FirebaseAuthenticaion/FirebaseAutometicNavigate.dart';
+import 'package:messmanager/FirebaseAuthenticaion/network_status.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,7 @@ late Animation<double> _animation;
       _animationController.addStatusListener((status){
         if (status == AnimationStatus.completed) {
           _animationController.reverse().then((onValue){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AutometicNavigate(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const NetworkStatus(),));
           });
         }
       });

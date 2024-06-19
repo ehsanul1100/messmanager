@@ -44,6 +44,25 @@ class _ManagerDrawerState extends State<ManagerDrawer> {
   }
 }
 
+class MemberDrawer extends StatefulWidget {
+  const MemberDrawer({super.key});
+
+  @override
+  State<MemberDrawer> createState() => _MemberDrawerState();
+}
+
+class _MemberDrawerState extends State<MemberDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        width: MediaQuery.of(context).size.width*.6,
+        backgroundColor: const Color.fromARGB(255, 55, 118, 150),
+        child: const CreateMemberDrawer()
+    );
+  }
+}
+
+
 AppBar appBarForManagerActionPages(String appBarTitle){
   return AppBar(
     title: Text(appBarTitle),

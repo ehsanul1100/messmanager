@@ -66,7 +66,7 @@ class AddMeal {
     String messMembertable,
     String memberUpdageField
   ) async {
-     MessDtails messDtails = MessDtails();
+     MessDetails messDtails = MessDetails();
     double personalMeal = 0;
     int messId = await getMessId();
     DocumentReference messdocumentReference =
@@ -106,7 +106,7 @@ class AddMeal {
     // String messMembertable,
     // String memberUpdageField
   ) async {
-     MessDtails messDtails = MessDtails();
+     MessDetails messDtails = MessDetails();
     double personalMeal = 0;
     int messId = await getMessId();
     DocumentReference messdocumentReference =

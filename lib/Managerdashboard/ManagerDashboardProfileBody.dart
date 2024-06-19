@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/UserInfo/current_user_information.dart';
 
 class ManagerDashboardProfileBody extends StatefulWidget {
@@ -16,29 +17,42 @@ class _ManagerDashboardProfileBodyState
   CurrentUserInformation currentUserInformation = CurrentUserInformation();
   @override
   Widget build(BuildContext context) {
-    //double widget_height = MediaQuery.of(context).size.height;
+    double widgetHeight = MediaQuery.of(context).size.height;
     double widgetWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-        gradient: linearGradient,
+        gradient: StyleOfBackground.backgroundColor,
       ),
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child:  Icon(
-                Icons.person_sharp,
-                size: 200,
-                shadows: [
-                  boxShadow,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [boxShadow],
+                      borderRadius: BorderRadius.circular(80)
+                    ),
+                    child:
+                      const CircleAvatar(
+                        radius: 80,
+                      )
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white60,
+                    child: IconButton(onPressed: (){
+                    }, icon: Icon(Icons.camera_alt)),
+                  )
                 ],
-                color: Colors.white60,
               ),
             ),
             Container(
               width: widgetWidth * .92,
+              height: widgetHeight*.3,
               decoration: BoxDecoration(
                 color: Colors.white,
                   borderRadius: BorderRadius.circular(10),

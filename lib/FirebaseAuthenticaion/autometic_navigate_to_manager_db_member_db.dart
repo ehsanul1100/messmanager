@@ -20,16 +20,18 @@ class _AutometicNavigateToManagerDbMemberDbState extends State<AutometicNavigate
   }
 
   StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>streamBuilderForThisPage(){
-    MessDtails messDtails = MessDtails();
+    MessDetails messDtails = MessDetails();
     return StreamBuilder <DocumentSnapshot<Map<String,dynamic>>>(
     stream: messDtails.getMemberInfo('Mess_Member_table'),
     builder: (context, snapshot) {
       if(snapshot.hasData){
         Map<String,dynamic>? memberData = snapshot.data?.data();
         if(memberData?['manager'] == true){
+          //return to the manager dashboard
           return const ManagerDashboard();
         }
         else{
+          // return to the member dashboard
           return const ResidentDashboard();
         }
       }

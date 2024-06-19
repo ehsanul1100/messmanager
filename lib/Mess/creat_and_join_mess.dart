@@ -10,8 +10,6 @@ class CreatAndJoinMessPage extends StatefulWidget {
 }
 
 class _CreatAndJoinMessPageState extends State<CreatAndJoinMessPage> {
-  final _messNameController = TextEditingController();
-  final _joinMessNameController = TextEditingController();
   CreateAppBarForManagerDashboard createAppBarForManagerDashboard = CreateAppBarForManagerDashboard();
   @override
   Widget build(BuildContext context) {

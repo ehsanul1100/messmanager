@@ -17,7 +17,7 @@ class _ManagerDashboardSettingsBodyState extends State<ManagerDashboardSettingsB
   CreateAppBarForManagerDashboard appBarForManagerDashboard = CreateAppBarForManagerDashboard();
   @override
   Widget build(BuildContext context) {
-    double widget_height = MediaQuery.of(context).size.height;
+    //double widgetheight = MediaQuery.of(context).size.height;
     double widgetWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBarForManagerDashboard.createAppBarForDashboard(),

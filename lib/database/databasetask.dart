@@ -34,9 +34,8 @@ class TasksDatabase{
     Database db,
     int version,
   ) async {
-    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const textType = 'TEXT NOT NULL';
-    const boolType = 'BOOLEAN NOT NULL';
+    // const textType = 'TEXT NOT NULL';
+    // const boolType = 'BOOLEAN NOT NULL';
   }
   //! c--> crud = create
 

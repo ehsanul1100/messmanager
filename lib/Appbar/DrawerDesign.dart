@@ -95,7 +95,7 @@ class _DrawerManagerActionsState extends State<DrawerManagerActions> {
                 color: Colors.black,
               ),
               const Text('Logout'),
-              const AutometicNavigate()),
+              const AutomaticNavigate()),
         )
       ],
     );
@@ -150,3 +150,93 @@ class _DrawerManagerActionsState extends State<DrawerManagerActions> {
     );
   }
 }
+class CreateMemberDrawer extends StatefulWidget {
+  const CreateMemberDrawer({super.key});
+
+  @override
+  State<CreateMemberDrawer> createState() => _CreateMemberDrawerState();
+}
+
+class _CreateMemberDrawerState extends State<CreateMemberDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          height: MediaQuery.of(context).size.height * .15,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [boxShadow],
+          ),
+          child: const ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.blue,
+            ),
+            title: Text('User name'),
+            subtitle: Text('Email'),
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6, right: 6, left: 6,top: 6),
+          child: userSignoutFunction(
+              const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              const Text('Logout'),
+              const AutomaticNavigate()),
+        )
+      ],
+    );
+  }
+  GlassContainer creatManagerActionIconGlassContainer(
+      Icon actionicondata, Text actioniconName, dynamic navigateToPageName) {
+    return GlassContainer(
+      opacity: .2,
+      child: TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return navigateToPageName;
+            },
+          ));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(flex: 2, child: actionicondata),
+            Expanded(flex: 8, child: actioniconName),
+          ],
+        ),
+      ),
+    );
+  }
+
+  GlassContainer userSignoutFunction(
+      Icon actionicondata, Text actioniconName, dynamic navigateToPageName) {
+    return GlassContainer(
+      opacity: .2,
+      child: TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+          FirebaseAuth.instance.signOut();
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return navigateToPageName;
+            },
+          ));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(flex: 2, child: actionicondata),
+            Expanded(flex: 8, child: actioniconName),
+          ],
+        ),
+      ),
+    );
+  }}

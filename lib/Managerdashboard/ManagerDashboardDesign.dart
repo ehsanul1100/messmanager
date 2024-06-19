@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 
-Container creatContainer(String? titleOfTheMessInformationTableElemet,var amuntOfTheElement) {
+Container creatContainer(String? titleOfTheMessInformationTableElemet,var amuntOfTheElement,BuildContext context) {
   return Container(
+    width: MediaQuery.of(context).size.width * 0.6,
     decoration: BoxDecoration(
       boxShadow: [boxShadow2],
       borderRadius: BorderRadius.circular(20),
@@ -30,9 +31,9 @@ TextStyle textStyle = TextStyle(
 );
 
 class StyleOfBackground {
-  static Color appBarColor =       Color.fromARGB(255, 255, 255, 255);
-  static Color bottomSheetColor = Color.fromARGB(255, 102, 173, 203);
-  static LinearGradient backgroundColor =  LinearGradient(
+  static Color appBarColor =       const Color.fromARGB(255, 255, 255, 255);
+  static Color bottomSheetColor = const Color.fromARGB(255, 102, 173, 203);
+  static LinearGradient backgroundColor =  const LinearGradient(
     stops: [
       .1,
      .7

@@ -3,7 +3,6 @@ import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashBoardBody.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardProfileBody.dart';
-import 'package:messmanager/Managerdashboard/ManagerDashboardSettingsBody.dart';
 import 'package:messmanager/Managerdashboard/mess_members_details.dart';
 
 class ManagerDashboard extends StatefulWidget {

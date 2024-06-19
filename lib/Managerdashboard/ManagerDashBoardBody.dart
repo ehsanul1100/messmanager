@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -39,11 +40,11 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
                 ),
                 SizedBox(
                   // shadowColor: Color.fromARGB(95, 0, 0, 0),
-                  height: MediaQuery.of(context).size.height * .20,
+                  height: MediaQuery.of(context).size.height * .3,
                   width: MediaQuery.of(context).size.width,
                   // blur: 6,
                   // opacity: .2,
-                  child: creatStreamBuilderForMess(
+                  child: createStreamBuilderForMess(
                       'Meal_Table',
                       'Monthly_meal_table',
                       'Meal',
@@ -58,10 +59,10 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
                   height: MediaQuery.of(context).size.height*.1,
                   child: Center(child: Text('My info')),
                 ),
-                SizedBox(
+                Container(
                     height: MediaQuery.of(context).size.height * .2,
                     width: MediaQuery.of(context).size.width,
-                    child: creatStreamBuilderForMember(
+                    child: createStreamBuilderForMember(
                         'Meal_Table',
                         'Monthly_meal_table',
                         'Meal',
@@ -77,7 +78,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     );
   }
 
-  StreamBuilder<CombinedData3> creatStreamBuilderForMember(
+  StreamBuilder<CombinedData3> createStreamBuilderForMember(
     String mealTableName,
     String monthlyMealTableName,
     String meal,
@@ -86,7 +87,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     String cost,
     String messMemberTableName,
   ) {
-    MessDtails messDtails = MessDtails();
+    MessDetails messDtails = MessDetails();
     Stream<DocumentSnapshot<Map<String, dynamic>>> stream1 = messDtails
         .getMessInfo(mealTableName, monthlyMealTableName, meal, DateTime.now());
     Stream<DocumentSnapshot<Map<String, dynamic>>> stream2 = messDtails
@@ -112,67 +113,75 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
           } catch (e) {
             mealCost = 0.0;
           }
-          return GridView(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10, crossAxisCount: 1),
-            scrollDirection: Axis.horizontal,
-            children: [
+          return CarouselSlider(
+            items: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'My balance',doubleOutput(memberData?['diposit']- mealCost)
+                    'My balance',doubleOutput(memberData?['diposit']- mealCost),context
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'My Deposit', doubleOutput(memberData?['diposit'])),
+                    'My Deposit', doubleOutput(memberData?['diposit']),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'My meal', doubleOutput(memberData?['meal'])),
+                    'My meal', doubleOutput(memberData?['meal']),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
                     'My meal cost',
-                    doubleOutput(mealCost)),
+                    doubleOutput(mealCost),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'Shopping cost', doubleOutput(memberData?['cost'])),
+                    'Shopping cost', doubleOutput(memberData?['cost']),context),
               )
             ],
+            options: CarouselOptions(
+              initialPage: 0,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              pageSnapping: true,
+              viewportFraction: .6,
+            ),
           );
         } else {
-          return GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10, crossAxisCount: 1),
-            scrollDirection: Axis.horizontal,
-            children: [
+          return CarouselSlider(
+            items: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('My balance', doubleOutput(0.0)),
+                child: creatContainer('My balance', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('My Deposit', doubleOutput(0.0)),
+                child: creatContainer('My Deposit', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('My meal', doubleOutput(0.0)),
+                child: creatContainer('My meal', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('My meal cost', doubleOutput(0.0)),
+                child: creatContainer('My meal cost', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Shopping cost', doubleOutput(0.0)),
+                child: creatContainer('Shopping cost', doubleOutput(0.0),context),
               )
             ],
+            options: CarouselOptions(
+              initialPage: 0,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              pageSnapping: true,
+              viewportFraction: .6,
+            ),
           );
         }
       },
@@ -191,7 +200,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     }
   }
 
-  StreamBuilder<CombinedData3> creatStreamBuilderForMess(
+  StreamBuilder<CombinedData3> createStreamBuilderForMess(
     String mealTableName,
     String monthlyMealTableName,
     String meal,
@@ -202,13 +211,13 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     String monthlyDepositTableName,
     String deposit,
   ) {
-    MessDtails messDtails = MessDtails();
-    Stream<DocumentSnapshot<Map<String, dynamic>>> stream1 = messDtails
+    MessDetails messDetails = MessDetails();
+    Stream<DocumentSnapshot<Map<String, dynamic>>> stream1 = messDetails
         .getMessInfo(mealTableName, monthlyMealTableName, meal, DateTime.now());
-    Stream<DocumentSnapshot<Map<String, dynamic>>> stream2 = messDtails
+    Stream<DocumentSnapshot<Map<String, dynamic>>> stream2 = messDetails
         .getMessInfo(costTableName, monthlyCostTableName, cost, DateTime.now());
     Stream<DocumentSnapshot<Map<String, dynamic>>> stream3 =
-        messDtails.getMessInfo(
+        messDetails.getMessInfo(
             depositTableName, monthlyDepositTableName, deposit, DateTime.now());
 
     return StreamBuilder<CombinedData3>(
@@ -225,65 +234,79 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
           Map<String, dynamic>? costData = snapshot.data?.data2;
           Map<String, dynamic>? depositData = snapshot.data?.data3;
 
-          return GridView(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10, crossAxisCount: 1),
-            scrollDirection: Axis.horizontal,
-            children: [
+          return CarouselSlider(
+            // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //     mainAxisSpacing: 10, crossAxisCount: 1),
+            // scrollDirection: Axis.horizontal,
+            items: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer('Meal Rate',
-                    doubleOutput(costData?[cost] / mealData?[meal])),
+                    doubleOutput(costData?[cost] / mealData?[meal]),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer('Balance',
-                    doubleOutput(depositData?[deposit] - costData?[cost])),
+                    doubleOutput(depositData?[deposit] - costData?[cost]),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
-                    creatContainer('Total meal', doubleOutput(mealData?[meal])),
+                    creatContainer('Total meal', doubleOutput(mealData?[meal]),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
-                    creatContainer('Total cost', doubleOutput(costData?[cost])),
+                    creatContainer('Total cost', doubleOutput(costData?[cost]),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: creatContainer(
-                    'Total deposit', doubleOutput(depositData?[deposit])),
+                    'Total deposit', doubleOutput(depositData?[deposit]),context),
               )
             ],
+            options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: true,
+              pageSnapping: true,
+              enableInfiniteScroll: false,
+              viewportFraction: .6,
+            ),
           );
         } else {
-          return GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10, crossAxisCount: 1),
-            scrollDirection: Axis.horizontal,
-            children: [
+          return CarouselSlider(
+            // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //     mainAxisSpacing: 10, crossAxisCount: 1),
+            // scrollDirection: Axis.horizontal,
+            items: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Meal Rate', doubleOutput(0.0)),
+                child: creatContainer('Meal Rate', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Balance', doubleOutput(0.0)),
+                child: creatContainer('Balance', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Total meal', doubleOutput(0.0)),
+                child: creatContainer('Total meal', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Total cost', doubleOutput(0.0)),
+                child: creatContainer('Total cost', doubleOutput(0.0),context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: creatContainer('Total deposit', doubleOutput(0.0)),
+                child: creatContainer('Total deposit', doubleOutput(0.0),context),
               )
             ],
+            options: CarouselOptions(
+              autoPlay: true,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              pageSnapping: true,
+              viewportFraction: .6,
+            ),
           );
         }
       },
@@ -291,7 +314,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
   }
 
   FutureBuilder<DocumentSnapshot<Map<String,dynamic>>> creatFutureBuilderForMessName(){
-    MessDtails messDtails = MessDtails();
+    MessDetails messDtails = MessDetails();
     return FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(future: messDtails.messNameReturn(), builder: (context, snapshot) {
       if (snapshot.hasData) {
         Map<String,dynamic>? messData = snapshot.data?.data();

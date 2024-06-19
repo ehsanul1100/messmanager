@@ -13,7 +13,7 @@ class ResidentDashboard extends StatefulWidget {
 }
 
 class _ResidentDashboardState extends State<ResidentDashboard> {
-  List managerDashboardBodys = [
+  List managerDashboardBody = [
     const ManagerDashboardBody(),
     const MessMembersDetails(),
     const ManagerDashboardProfileBody(),
@@ -24,7 +24,8 @@ class _ResidentDashboardState extends State<ResidentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarForManagerDashboard.createAppBarForDashboard(),
-      body: managerDashboardBodys[managerDashboardBodyIndex],
+      drawer: const MemberDrawer(),
+      body: managerDashboardBody[managerDashboardBodyIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         unselectedItemColor: Colors.black,

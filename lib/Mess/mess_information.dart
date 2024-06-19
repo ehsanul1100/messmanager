@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 
-class MessDtails {
+class MessDetails {
   dynamic messWantedInformationByCall(
     int messId,
     String requiredInforName,
@@ -108,6 +108,16 @@ class MessDtails {
         .collection(baseTableName)
         .doc(userDocId!.email)
         .snapshots();
+  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMembersInfo(
+      String baseTableName,
+      ) async* {
+    AddMeal addMeal = AddMeal();
+    int messId = await addMeal.getMessId();
+    yield* FirebaseFirestore.instance
+        .collection('All_Mess')
+        .doc('$messId')
+        .collection(baseTableName).snapshots();
   }
   
 }
