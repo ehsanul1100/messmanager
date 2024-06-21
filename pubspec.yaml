@@ -93,7 +93,7 @@ flutter:
   fonts:
     - family: OurFont
       fonts:
-        - asset: fonts/ProtestRevolution-Regular.ttf
+        - asset: fonts/Kanit-Black.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

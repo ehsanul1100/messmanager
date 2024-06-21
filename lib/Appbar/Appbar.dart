@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/DrawerDesign.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/UserInfo/current_user_information.dart';
+import 'package:messmanager/style/text_style.dart';
 
 class CreateAppBarForManagerDashboard{
+  StyleOfText styleOfText = StyleOfText();
   Map<String, dynamic>? user ;
   CurrentUserInformation currentUserInformation = CurrentUserInformation();
   AppBar createAppBarForDashboard() {
     return AppBar(
       centerTitle: true,
       backgroundColor: StyleOfBackground.appBarColor,
-      title: FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(
-        future: currentUserInformation.getUserInformatio(),
+      title: StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>(
+        stream: currentUserInformation.getUserInformationAsStream(),
          builder: (context, snapshot) {
            if (snapshot.hasData) {
              user = snapshot.data?.data();
-             return Text(user?['userName']);
+             return Text(user?['userName'],style: styleOfText.textStyleForTitle(context, Colors.black),);
            } else {
              return const Text('');
            }
@@ -38,7 +40,6 @@ class _ManagerDrawerState extends State<ManagerDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width*.6,
-      backgroundColor: const Color.fromARGB(255, 55, 118, 150),
       child: const DrawerManagerActions()
     );
   }
@@ -56,7 +57,6 @@ class _MemberDrawerState extends State<MemberDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
         width: MediaQuery.of(context).size.width*.6,
-        backgroundColor: const Color.fromARGB(255, 55, 118, 150),
         child: const CreateMemberDrawer()
     );
   }
@@ -66,7 +66,7 @@ class _MemberDrawerState extends State<MemberDrawer> {
 AppBar appBarForManagerActionPages(String appBarTitle){
   return AppBar(
     title: Text(appBarTitle),
-    backgroundColor: const Color.fromARGB(255, 55, 118, 150),
+    backgroundColor: StyleOfBackground.appBarColor,
     centerTitle: true,
   );
 }

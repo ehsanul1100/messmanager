@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 import 'package:messmanager/Mess/change_manager.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
@@ -27,7 +28,7 @@ class _ChangeManagerActionsState extends State<ChangeManagerActions> {
       body: Stack(
         children: [Container(
           decoration: BoxDecoration(
-            gradient: linearGradient,
+            gradient: StyleOfBackground.backgroundColor,
           ),),
           Column(
             children: [

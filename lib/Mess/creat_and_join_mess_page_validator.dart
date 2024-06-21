@@ -51,7 +51,7 @@ class CreatMess {
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('Required variable')
         .doc('Mess id');
-    DocumentSnapshot<Map<String, dynamic>> currentUserInformationForMess = await currentUserInformation.getUserInformatio();
+    DocumentSnapshot<Map<String, dynamic>> currentUserInformationForMess = await currentUserInformation.getUserInformation();
     Map<String, dynamic> messId;
     Map<String,dynamic> userInfo;
     if (documentSnapshot.exists && currentUserInformationForMess.exists) {

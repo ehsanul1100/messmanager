@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/mess_information.dart';
+import 'package:messmanager/style/text_style.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManagerDashboardBody extends StatefulWidget {
@@ -14,6 +15,7 @@ class ManagerDashboardBody extends StatefulWidget {
 }
 
 class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
+  StyleOfText styleOfText = StyleOfText();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,12 +32,12 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .03,
-                  child: creatFutureBuilderForMessName(),
+                  child: createFutureBuilderForMessName(),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .03,
                   child: Center(
-                    child: Text(DateFormat('yMMM').format(DateTime.now())),
+                    child: Text(DateFormat('yMMM').format(DateTime.now()),style: styleOfText.textStyleForSubTitle(),),
                   ),
                 ),
                 SizedBox(
@@ -57,7 +59,7 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height*.1,
-                  child: Center(child: Text('My info')),
+                  child: Center(child: Text('My info',style: styleOfText.textStyleForSubTitle(),)),
                 ),
                 Container(
                     height: MediaQuery.of(context).size.height * .2,
@@ -87,13 +89,13 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     String cost,
     String messMemberTableName,
   ) {
-    MessDetails messDtails = MessDetails();
-    Stream<DocumentSnapshot<Map<String, dynamic>>> stream1 = messDtails
+    MessDetails messDetails = MessDetails();
+    Stream<DocumentSnapshot<Map<String, dynamic>>> stream1 = messDetails
         .getMessInfo(mealTableName, monthlyMealTableName, meal, DateTime.now());
-    Stream<DocumentSnapshot<Map<String, dynamic>>> stream2 = messDtails
+    Stream<DocumentSnapshot<Map<String, dynamic>>> stream2 = messDetails
         .getMessInfo(costTableName, monthlyCostTableName, cost, DateTime.now());
     Stream<DocumentSnapshot<Map<String, dynamic>>> stream3 =
-        messDtails.getMemberInfo(messMemberTableName);
+        messDetails.getMemberInfo(messMemberTableName);
     return StreamBuilder<CombinedData3>(
       stream: Rx.combineLatest3(stream1, stream2, stream3,
           (DocumentSnapshot<Map<String, dynamic>> snapshot1,
@@ -313,16 +315,16 @@ class _ManagerDashboardBodyState extends State<ManagerDashboardBody> {
     );
   }
 
-  FutureBuilder<DocumentSnapshot<Map<String,dynamic>>> creatFutureBuilderForMessName(){
-    MessDetails messDtails = MessDetails();
-    return FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(future: messDtails.messNameReturn(), builder: (context, snapshot) {
+  FutureBuilder<DocumentSnapshot<Map<String,dynamic>>> createFutureBuilderForMessName(){
+    MessDetails messDetails = MessDetails();
+    return FutureBuilder<DocumentSnapshot<Map<String,dynamic>>>(future: messDetails.messNameReturn(), builder: (context, snapshot) {
       if (snapshot.hasData) {
         Map<String,dynamic>? messData = snapshot.data?.data();
         return Center(
-          child: Text(messData?['messName']),
+          child: Text(messData?['messName'],style: styleOfText.textStyleForTitle(context,Colors.black),),
         );
       } else {
-        return const Center(child: Text('Mess Name'),);
+        return const Center(child: Text(''),);
       }
     },);
   }

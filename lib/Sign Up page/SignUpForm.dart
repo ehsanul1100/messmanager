@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/LoginPage/loginPage.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -27,7 +28,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(gradient: linearGradient),
+      decoration: BoxDecoration(gradient: StyleOfBackground.backgroundColor),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

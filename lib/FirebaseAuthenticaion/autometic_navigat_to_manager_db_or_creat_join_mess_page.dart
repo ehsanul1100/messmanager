@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/autometic_navigate_to_manager_db_member_db.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardSettingsBody.dart';
+import 'package:messmanager/style/text_style.dart';
+
+import '../Managerdashboard/ManagerDashboardDesign.dart';
 
 class AutomaticNavigateToManagerDbOrCreateJoinMessPage extends StatefulWidget {
   const AutomaticNavigateToManagerDbOrCreateJoinMessPage({super.key});
@@ -12,6 +15,7 @@ class AutomaticNavigateToManagerDbOrCreateJoinMessPage extends StatefulWidget {
 }
 
 class _AutomaticNavigateToManagerDbOrCreateJoinMessPageState extends State<AutomaticNavigateToManagerDbOrCreateJoinMessPage> {
+  StyleOfText styleOfText = StyleOfText();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,11 @@ class _AutomaticNavigateToManagerDbOrCreateJoinMessPageState extends State<Autom
         }
       }
       else{
-        return  const Center(child: CircularProgressIndicator());
+        return Container(
+            decoration: BoxDecoration(
+                gradient: StyleOfBackground.backgroundColor
+            ),
+            child:  Center(child: Text('Preparing environment for you...',style: styleOfText.textStyleForTitle(context,Colors.white),),));
       }
     },);
   }

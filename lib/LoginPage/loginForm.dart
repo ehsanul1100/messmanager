@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/FirebaseAuthenticaion/FirebaseAuthenticaion.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpPage.dart';
 
 class LoginForm extends StatefulWidget {
@@ -21,7 +22,7 @@ class _LoginFormState extends State<LoginForm> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        gradient: linearGradient
+        gradient: StyleOfBackground.backgroundColor
       ),
       child: SingleChildScrollView(
         child: Column(

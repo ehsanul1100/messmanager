@@ -21,7 +21,7 @@ class AddMessMember {
   ) async {
 //mess Id
     DocumentSnapshot<Map<String, dynamic>> currentUser =
-        await currentUserInformation.getUserInformatio();
+        await currentUserInformation.getUserInformation();
 
 //Show a circular loading
     showDialog(

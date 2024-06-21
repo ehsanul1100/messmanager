@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Mess/mess_information.dart';
 import 'package:messmanager/Resident/resident_dashboard.dart';
+import 'package:messmanager/style/text_style.dart';
+
+import '../Managerdashboard/ManagerDashboardDesign.dart';
 
 class AutometicNavigateToManagerDbMemberDb extends StatefulWidget {
   const AutometicNavigateToManagerDbMemberDb({super.key});
@@ -20,9 +23,10 @@ class _AutometicNavigateToManagerDbMemberDbState extends State<AutometicNavigate
   }
 
   StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>streamBuilderForThisPage(){
-    MessDetails messDtails = MessDetails();
+    StyleOfText styleOfText = StyleOfText();
+    MessDetails messDetails = MessDetails();
     return StreamBuilder <DocumentSnapshot<Map<String,dynamic>>>(
-    stream: messDtails.getMemberInfo('Mess_Member_table'),
+    stream: messDetails.getMemberInfo('Mess_Member_table'),
     builder: (context, snapshot) {
       if(snapshot.hasData){
         Map<String,dynamic>? memberData = snapshot.data?.data();
@@ -36,7 +40,11 @@ class _AutometicNavigateToManagerDbMemberDbState extends State<AutometicNavigate
         }
       }
       else{
-        return const Center(child: CircularProgressIndicator());
+        return Container(
+            decoration: BoxDecoration(
+                gradient: StyleOfBackground.backgroundColor
+            ),
+            child:  Center(child: Text('Analysing data security...',style: styleOfText.textStyleForTitle(context,Colors.white),),));
       }
     },);
   }

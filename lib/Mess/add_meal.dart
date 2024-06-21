@@ -7,7 +7,7 @@ class AddMeal {
   CurrentUserInformation currentUserInformation = CurrentUserInformation();
   Future<int> getMessId() async {
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await currentUserInformation.getUserInformatio();
+        await currentUserInformation.getUserInformation();
     Map<String, dynamic>? managerMessInfo = documentSnapshot.data()!;
     return managerMessInfo['mess'];
   }

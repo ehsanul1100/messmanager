@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/add_cost.dart';
 import 'package:messmanager/Mess/add_diopsit.dart';
 import 'package:messmanager/Mess/add_meal.dart';
@@ -26,15 +27,15 @@ class _AddDepositActionsState extends State<AddDepositActions> {
   final _dipositAmount = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double widgetHight = MediaQuery.of(context).size.height;
+    double widgetHeight = MediaQuery.of(context).size.height;
     double widgetWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBarForManagerActionPages('Add Deposit'),
       body: Stack(children: [
         Container(
-          height: widgetHight,
+          height: widgetHeight,
           decoration: BoxDecoration(
-            gradient: linearGradient,
+            gradient: StyleOfBackground.backgroundColor,
           ),
         ),
         SingleChildScrollView(
@@ -42,12 +43,12 @@ class _AddDepositActionsState extends State<AddDepositActions> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(height: widgetHight * .01),
+              Container(height: widgetHeight * .01),
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [boxShadow]),
-                  height: widgetHight * .06,
+                  height: widgetHeight * .06,
                   width: widgetWidth * .92,
                   child: ElevatedButton(
                       onPressed: () async {
@@ -67,7 +68,7 @@ class _AddDepositActionsState extends State<AddDepositActions> {
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Container(
-                  height: widgetHight * .6,
+                  height: widgetHeight * .6,
                   width: widgetWidth * .92,
                   child: Column(
                     children: [

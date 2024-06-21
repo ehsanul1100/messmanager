@@ -5,6 +5,7 @@ import 'package:messmanager/LoginPage/textfildStyle.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 import 'package:messmanager/Mess/mess_information.dart';
+import 'package:messmanager/style/text_style.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MessMembersDetails extends StatefulWidget {
@@ -18,6 +19,7 @@ class _MessMembersDetailsState extends State<MessMembersDetails> {
   MessDetails messDetails = MessDetails();
   AddMeal addMeal = AddMeal();
   int indexOfMember = 0;
+  StyleOfText styleOfText = StyleOfText();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +43,7 @@ class _MessMembersDetailsState extends State<MessMembersDetails> {
                             child: GestureDetector(
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 82, 147, 163),
+                                    color: const Color.fromARGB(255, 82, 140, 163),
                                     boxShadow: [boxShadow2],
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Padding(
@@ -62,7 +64,7 @@ class _MessMembersDetailsState extends State<MessMembersDetails> {
                                           flex: 4,
                                           child: Center(
                                               child: Text(
-                                                  member[index]['userName'])))
+                                                  member[index]['userName'],style: styleOfText.textStyleForTitle(context,Colors.white),)))
                                     ],
                                   ),
                                 ),
@@ -153,7 +155,8 @@ class _MessMembersDetailsState extends State<MessMembersDetails> {
                   'Meal', doubleOutput(member?[indexOfMember]['meal'])),
               createCardForMemberDetail('Meal cost', mealCost),
               createCardForMemberDetail(
-                  'Shopping cost', doubleOutput(member?[indexOfMember]['cost']))
+                  'Shopping cost', doubleOutput(member?[indexOfMember]['cost'])),
+              cardForButton('Details'),
             ],
           );
         } else {
@@ -179,14 +182,29 @@ class _MessMembersDetailsState extends State<MessMembersDetails> {
 
   Card createCardForMemberDetail(String valueName, double valueToShow) {
     return Card(
-      color: Colors.teal[300],
+      color: Colors.white,
       margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * .06,
           vertical: MediaQuery.of(context).size.height * 0.008),
       elevation: 6,
       child: ListTile(
-        title: Text(valueName),
-        trailing: Text('$valueToShow'),
+        title: Text(valueName,style: styleOfText.textStyleForSubTitle(),),
+        trailing: Text('$valueToShow',style: styleOfText.textStyleForDoubleNumber(),),
+      ),
+    );
+  }
+  Card cardForButton (String buttonTitle){
+    return Card(
+      margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * .06,
+          vertical: MediaQuery.of(context).size.height * 0.008),
+      elevation: 6,
+      child: TextButton(
+        child: Text(buttonTitle,style: styleOfText.textStyleForSubTitle(),),
+        onPressed: () {
+
+        }
+          ,
       ),
     );
   }
@@ -198,4 +216,10 @@ class CombinedData3 {
   final List? data3;
 
   CombinedData3(this.data1, this.data2, this.data3);
+}
+class CombinedData2 {
+  final Map<String, dynamic>? data1;
+  final Map<String, dynamic>? data2;
+
+  CombinedData2(this.data1, this.data2);
 }

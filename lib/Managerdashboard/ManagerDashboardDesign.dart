@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/style/text_style.dart';
 
 Container creatContainer(String? titleOfTheMessInformationTableElemet,var amuntOfTheElement,BuildContext context) {
+  StyleOfText styleOfText = StyleOfText();
   return Container(
     width: MediaQuery.of(context).size.width * 0.6,
     decoration: BoxDecoration(
@@ -16,10 +18,10 @@ Container creatContainer(String? titleOfTheMessInformationTableElemet,var amuntO
         children: [
           Expanded(
             flex: 5,
-            child: Text(titleOfTheMessInformationTableElemet!)),
+            child: Text(titleOfTheMessInformationTableElemet!,style: styleOfText.textStyleForTitle(context,Colors.white),)),
           Expanded(
             flex: 5,
-            child: Text('$amuntOfTheElement')),
+            child: Text('$amuntOfTheElement',style: styleOfText.textStyleForDoubleNumber(),)),
         ],
       ),
     ),
@@ -44,4 +46,18 @@ class StyleOfBackground {
       Color.fromARGB(255, 255, 255, 255),
       Color.fromARGB(255, 102, 173, 203)
     ]);
+  static LinearGradient backgroundColorForProfilePage =  const LinearGradient(
+     //transform: GradientRotation(2.5),
+      tileMode: TileMode.repeated,
+      stops: [
+        .7,
+        .9
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+
+        Color.fromARGB(255, 102, 173, 203),
+        Color.fromARGB(255, 255, 255, 255),
+      ]);
 }

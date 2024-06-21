@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/add_mess_member.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
 
@@ -24,7 +25,7 @@ class _AddMessMemberActionsState extends State<AddMessMemberActions> {
           Center(
             child: Container(
               decoration: BoxDecoration(
-                gradient: linearGradient
+                gradient: StyleOfBackground.backgroundColor
               ),
             ),
           ),

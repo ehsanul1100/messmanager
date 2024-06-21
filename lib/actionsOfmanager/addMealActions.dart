@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/add_meal.dart';
 
 class AddMealActions extends StatefulWidget {
@@ -28,7 +29,7 @@ class _AddMealActionsState extends State<AddMealActions> {
       body: Stack(children: [
         Container(
           decoration: BoxDecoration(
-            gradient: linearGradient,
+            gradient: StyleOfBackground.backgroundColor,
           ),
         ),
         SingleChildScrollView(

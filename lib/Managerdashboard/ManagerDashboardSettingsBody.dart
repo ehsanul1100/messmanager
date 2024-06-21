@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messmanager/Appbar/Appbar.dart';
 import 'package:messmanager/LoginPage/textfildStyle.dart';
+import 'package:messmanager/Managerdashboard/ManagerDashboardDesign.dart';
 import 'package:messmanager/Mess/creat_and_join_mess_page_validator.dart';
 
 class ManagerDashboardSettingsBody extends StatefulWidget {
@@ -17,13 +18,13 @@ class _ManagerDashboardSettingsBodyState extends State<ManagerDashboardSettingsB
   CreateAppBarForManagerDashboard appBarForManagerDashboard = CreateAppBarForManagerDashboard();
   @override
   Widget build(BuildContext context) {
-    //double widgetheight = MediaQuery.of(context).size.height;
+    //double widgetHeight = MediaQuery.of(context).size.height;
     double widgetWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBarForManagerDashboard.createAppBarForDashboard(),
       body: Container(
           decoration: BoxDecoration(
-            gradient: linearGradient,
+            gradient: StyleOfBackground.backgroundColor,
           ),
           child: Center(
             child: SingleChildScrollView(

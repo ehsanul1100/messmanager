@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:messmanager/FirebaseAuthenticaion/autometic_navigat_to_manager_db_or_creat_join_mess_page.dart';
 import 'package:messmanager/Managerdashboard/ManagerDashboard.dart';
 import 'package:messmanager/Sign%20Up%20page/SignUpFormValidator.dart';
+import 'package:messmanager/Sign%20Up%20page/get_and_upload_image.dart';
 
 class UserAuth {
   static Future<void> creatUser(String email, String password,
@@ -22,7 +24,7 @@ class UserAuth {
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) {
           debugPrint('Sign in compleat');
-          return const ManagerDashboard();
+          return  GetAndUploadImage(previousPage: 'Signup');
         },
       ));
     } on FirebaseAuthException catch (e) {
@@ -66,7 +68,7 @@ class UserLogin {
       Navigator.pop(context);
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) {
-          return ManagerDashboard();
+          return const AutomaticNavigateToManagerDbOrCreateJoinMessPage();
         },
       ));
     } on FirebaseAuthException catch (e) {

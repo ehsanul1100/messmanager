@@ -3,23 +3,32 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class CurrentUserInformation {
   User? currentUser = FirebaseAuth.instance.currentUser;
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformatio() async {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformation() async {
     return await FirebaseFirestore.instance
         .collection('User')
         .doc(currentUser!.email)
         .get();
   }
 
-  Future<dynamic> currentUserParticularInformation(
-    String informationName,
-  )async{
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    DocumentSnapshot<Map<String,dynamic>> currentUserDocument = await FirebaseFirestore.instance
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+      getUserInformationAsStream() async* {
+    yield* FirebaseFirestore.instance
         .collection('User')
         .doc(currentUser!.email)
-        .get();
-      
-    Map<String,dynamic>? userInfo = currentUserDocument.data();
+        .snapshots();
+  }
+
+  Future<dynamic> currentUserParticularInformation(
+    String informationName,
+  ) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    DocumentSnapshot<Map<String, dynamic>> currentUserDocument =
+        await FirebaseFirestore.instance
+            .collection('User')
+            .doc(currentUser!.email)
+            .get();
+
+    Map<String, dynamic>? userInfo = currentUserDocument.data();
     return userInfo![informationName];
   }
 }
